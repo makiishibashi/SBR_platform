@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Manual Inquiry Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header img {
+            width: 50%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .inquiry-form,
+        .response-section {
+            background: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .response {
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Service Manual Inquiry Platform</h1>
+        <img src="img/top-image.png" alt="Car Image">
+    </header>
+    <main>
+        <section class="inquiry-form">
+            <h2>Submit an Inquiry</h2>
+            <form id="inquiryForm">
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <select id="topic" name="topic" required>
+                        <option value="">Select a topic</option>
+                        <option value="manual_error">Manual Error</option>
+                        <option value="technical_question">Technical Question</option>
+                        <option value="general_inquiry">General Inquiry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit">Submit Inquiry</button>
+            </form>
+        </section>
+        <section class="response-section">
+            <h2>Responses</h2>
+            <div id="responses">
+                <p>No responses yet.</p>
+            </div>
+        </section>
+    </main>
+    <script>
+        const inquiryForm = document.getElementById('inquiryForm');
+        const responsesDiv = document.getElementById('responses');
+
+        inquiryForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const topic = event.target.topic.value;
+            const description = event.target.description.value;
+            const email = event.target.email.value;
+
+            const responseHTML = `
+                <div class="response">
+                    <p><strong>Topic:</strong> ${topic}</p>
+                    <p><strong>Description:</strong> ${description}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><em>Response pending...</em></p>
+                </div>
+            `;
+
+            responsesDiv.innerHTML += responseHTML;
+            inquiryForm.reset();
+        });
+    </script>
+</body>
+
+</html>
